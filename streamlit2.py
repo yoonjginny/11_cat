@@ -12,10 +12,10 @@ import requests
 from dotenv import load_dotenv
 # .env 파일에서 환경 변수 로드.py
 load_dotenv()
+load_dotenv()
 
 # 환경 변수에서 API 키 가져오기
-openai_api_key = "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"
-
+openai_api_key = os.getenv("OPENAI_API_KEY")
 #
 if openai_api_key:
     os.environ["OPENAI_API_KEY"] = openai_api_key
