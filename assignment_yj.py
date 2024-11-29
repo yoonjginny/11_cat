@@ -1,15 +1,16 @@
-#
+# 1. 사용 환경 준비 
 import os
 from getpass import getpass
 os.environ["OPENAI_API_KEY"] = getpass("OpenAI API key 입력: ")
+# env로 따로 저장 
 
-#
+# 2. 모델 초기화 (model)
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
 
 model = ChatOpenAI(model="gpt-4o-mini")
 
-# 3.
+# 3. 네이버 뉴스 API를 이용한 데이터 로드 (get_news -> news_data)
 import requests
 
 NAVER_NEWS_API_URL = "https://openapi.naver.com/v1/search/news.json"
@@ -28,7 +29,7 @@ def get_news(query, display=10):
 
 news_data = get_news("오늘의 뉴스")
 
-# 4.
+# 4. Langchain을 이용한 뉴스 데이터 처리 (loader -> docs)
 from langchain_core.documents import Document
 
 class NaverNewsLoader:
@@ -49,11 +50,11 @@ class NaverNewsLoader:
         ]
         return documents
 
-# 문서 불러오기
+  # 문서 로드 (loader)
 loader = NaverNewsLoader(news_data=news_data)
 docs = loader.load()
 
-# 5.
+# 5. chunking (splits)
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 recursive_text_splitter = RecursiveCharacterTextSplitter(
@@ -65,37 +66,36 @@ recursive_text_splitter = RecursiveCharacterTextSplitter(
 
 splits = recursive_text_splitter.split_documents(docs)
 
-# 6.
+# 6. embedding
 from langchain_openai import OpenAIEmbeddings
 embeddings = OpenAIEmbeddings(model="text-embedding-ada-002") # 토큰화된 문서를 모델에 입력하여 임베딩 벡터를 생성하고, 이를 평균하여 전체 문서의 벡터를 생성
 
-# 7.
+# 7. vector store 생성
 from langchain_community.vectorstores import FAISS
 
 vectorstore = FAISS.from_documents(documents=splits, embedding=embeddings)
 
-# 8.
+# 8. retriever 생성
 from langchain.vectorstores.base import VectorStore
 
 retriever = vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 10})
 
-# 9.
+# 9. 프롬프트 템플릿 정의
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 
-# 프롬프트 템플릿 정의
 contextual_prompt = ChatPromptTemplate.from_messages([
     ("system", "Answer the question using only the following context."),
     ("user", "Context: {context}\\n\\nQuestion: {question}")
 ])
 
-# 10.
-# 디버깅을 위해 만든 클래스 (신경쓰지 않으셔도 됩니다.)
+# 10. RAG 체인 구성
+ # 디버깅을 위해 만든 클래스
 class SimplePassThrough:
     def invoke(self, inputs, **kwargs):
         return inputs
 
-# 프롬프트 클래스
+ # 프롬프트 클래스 (response docs -> context)
 class ContextToPrompt:
     def __init__(self, prompt_template):
         self.prompt_template = prompt_template
@@ -114,7 +114,7 @@ class ContextToPrompt:
         )
         return formatted_prompt
 
-# Retriever 클래스
+ # Retriever 클래스 (query)
 class RetrieverWrapper:
     def __init__(self, retriever):
         self.retriever = retriever
@@ -129,15 +129,14 @@ class RetrieverWrapper:
         response_docs = self.retriever.get_relevant_documents(query) # 검색을 수행하고 검색 결과를 response_docs에 저장
         return response_docs
 
-# RAG 체인 설정
+ # RAG 체인 설정
 rag_chain_debug = {
     "context": RetrieverWrapper(retriever), # 클래스 객체를 생성해서 value로 넣어줌
     "prompt": ContextToPrompt(contextual_prompt),
     "llm": model
 }
 
-# 11.
-# 챗봇 구동
+# 11. 챗봇 구동
 while True:
     print("========================")
 
@@ -158,3 +157,33 @@ while True:
 
     print("\n답변:")
     print(response.content)
+
+# 12. 대화 내용 저장
+from langchain.schema import SystemMessage, HumanMessage, AIMessage
+from langchain_community.chat_message_histories import ChatMessageHistory
+from langchain.chat_models import ChatOpenAI
+
+chat_history = ChatMessageHistory()
+
+# chat_history.messages.append(SystemMessage(content='너의 이름은 햄식이이고, 아주 귀여운 햄스터야. 모든 말을 햄으로 끝내.'))
+
+
+while True:
+    user_input=input('사용자:')
+    if user_input in ['그만','잘있어']:
+     print('종료')
+     break
+    # 사용자 메세지를 대화 기록에 추가
+    chat_history.add_user_message(query)
+    # 모델에 대화기록을 전달하기 전에, message 타입으로 전환
+    message=chat_history.message
+    try:
+     ai_message=model(message)
+     chat_history.add_ai_message(response.content)
+     print(f'챗봇: {response.content}')
+    except Exception as e:
+     print('챗봇: 오류 발생')
+     print(f'오류: {e}')
+     break
+
+print(chat_history)
