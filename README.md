@@ -6,7 +6,7 @@
 | 이름 | 팀 내 역할 | 분담된 역할 |
 | ---------- | ---------- | ---------- |
 | 인정배 | 팀장 | 모델 학습 및 데이터 전처리, RAG체인 |
-| 오승진 | 서기 | Streamlit 인터페이스, 문서작성 |
+| 오승진 | 서기 | SA문서, REDEME작성 |
 | 박윤지 | 팀원 | 깃허브 관리, 지라 관리, 모델 학습 |
 | 이유림 | 팀원 | PPT 작성 |
 
@@ -18,7 +18,7 @@
 ***
 
 ## 프로젝트 구조
-[프로젝트 구조](https://excalidraw.com/#json=L_xNbOJkO6tpeWRN1RyPB,dhRrWrvJsdPTKo-Q-HW7Sg)
+[🔑프로젝트 구조](https://excalidraw.com/#json=L_xNbOJkO6tpeWRN1RyPB,dhRrWrvJsdPTKo-Q-HW7Sg)
 ***
 
 ## 주요 기능
@@ -30,18 +30,22 @@
 
 ## 구현 기술
 ```
+사용자의 질문에 알맞은 응답대응
 실시간 정보 업데이트
-텍스트 음성 지원 기술
 ```
 ***
 
 ## 설치 라이브러리 
-| langchain |  |  |
-| ---------- | ---------- | ---------- |
-| langchain |  |  |
-| OpenAI |  |  |
-| text.split |  |  |
-|  |  |  |
+| 라이브러리 |
+| ---------- |
+| langchain_openai |
+| langchain_core.messages |
+| langchain.document_loaders |
+| langchain.text_splitter |
+| langchain.vectorstores.base |
+| langchain_core.prompts |
+| langchain_core.runnables |
+| langchain.chains |
 ***
 
 ## 문제 해결 방안
