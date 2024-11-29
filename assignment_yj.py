@@ -2,7 +2,9 @@
 import os
 from getpass import getpass
 os.environ["OPENAI_API_KEY"] = getpass("OpenAI API key 입력: ")
+
 # env로 따로 저장 
+
 
 # 2. 모델 초기화 (model)
 from langchain_openai import ChatOpenAI
