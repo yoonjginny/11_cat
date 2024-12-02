@@ -1,4 +1,4 @@
-from dotenv import load_dotenv
+from dotenv import dotenv_values
 import os
 
 from langchain_openai import ChatOpenAI
@@ -23,8 +23,9 @@ from langchain_community.chat_message_histories import ChatMessageHistory
 from datetime import datetime
 
 # 1. 환경 변수에서 API 키 가져오기
-load_dotenv()
-openai_api_key = os.getenv("LLM_11_CAT_PROJECT")
+config = dotenv_values(".env")
+openai_api_key = config.get('OPENAI_API_KEY')
+#openai_api_key = os.getenv("LLM_11_CAT_PROJECT")
 #from getpass import getpass
 #os.environ["OPENAI_API_KEY"] = getpass("OpenAI API key 입력: ")
 naver_client_id = os.getenv("NAVER_CLIENT_ID")
