@@ -6,7 +6,7 @@
 | 이름 | 팀 내 역할 | 분담된 역할 |
 | ---------- | ---------- | ---------- |
 | 인정배 | 팀장 | 모델 학습 및 데이터 전처리, RAG체인, Streamlit 오류해결 |
-| 오승진 | 서기 | SA문서, REDEME작성 |
+| 오승진 | 서기 | SA문서, REDEME작성, PPT 작성 |
 | 박윤지 | 팀원 | 깃허브 관리, 지라 관리, streamlit 인터페이스 |
 | 이유림 | 팀원 | PPT 작성 |
 
@@ -21,6 +21,8 @@
 
 ## 프로젝트 구조
 [🔑프로젝트 구조](https://excalidraw.com/#json=QuYLlVgxDJso7_o-aGJHG,rBnzBwNOyYYGqi7i_7QJWw)
+## 프로젝트 PPT
+[✨프로젝트 보고서](https://docs.google.com/presentation/d/1Es9X6uiWgfBH_jLD8_vWzjJNfTw97hQ_kcZoeq4DXLA/edit#slide=id.p1)
 ***
 
 ## 주요 기능
@@ -52,11 +54,16 @@
 
 ## 문제 해결 방안
 ```
-대화 내용이 저장이 안되는 문제점이 발생함. <<
+대화 내용이 저장이 안되는 문제점이 발생함(메모리 기능 정상작동X). << 
+
+OPEN_API_KEY를 대입하는 과정에서 환경변수 문제가 발생함.(최장범 매니저님을 통해 API키를 새로 발급받았으나, 새로 받은 키를 불러오지 않고 기존에 있던 키를 불러옴.) << 천준석 튜터님을 통해 해결 되었음.
 
 ```
 ***
 
+
+
+***
 ## 결과
 
 ***
