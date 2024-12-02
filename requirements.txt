@@ -1,0 +1,23 @@
+faiss-cpu==1.9.0.post1
+fastapi==0.115.5
+ipykernel==6.29.5
+ipython==8.29.0
+json5 @ file:///tmp/build/80754af9/json5_1624432770122/work
+jsonpatch @ file:///C:/b/abs_4fdm88t7zi/croot/jsonpatch_1714483974578/work
+jsonpointer==2.1
+jsonschema @ file:///C:/b/abs_394_t6__xq/croot/jsonschema_1728486718320/work
+jsonschema-specifications @ file:///C:/Users/dev-admin/py312/jsonschema-specifications_1706803038066/work
+jupyter_client==8.6.3
+jupyter_core==5.7.2
+langchain==0.2.16
+langchain-community==0.2.16
+langchain-core==0.2.43
+langchain-openai==0.1.23
+langchain-text-splitters==0.2.4
+loguru==0.7.2
+openai==1.55.0
+requests @ file:///C:/b/abs_9frifg92q2/croot/requests_1721410901096/work
+pydantic @ file:///C:/b/abs_b7acb4hnl_/croot/pydantic_1725040540545/work
+pydantic_core @ file:///C:/b/abs_3ax4s6v28p/croot/pydantic-core_1724790490828/work
+streamlit==1.40.2
+tiktoken==0.8.0
