@@ -1,3 +1,5 @@
+# FastAPI 서버 코드
+
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import rag  # rag.py를 불러옵니다
