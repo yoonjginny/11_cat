@@ -143,21 +143,31 @@ class RetrieverWrapper:
         response_docs = self.retriever.get_relevant_documents(query) # 검색을 수행하고 검색 결과를 response_docs에 저장
         return response_docs
 
- # RAG 체인 설정
+
+# RAG 체인 설정
 rag_chain_debug = {
-    "context": RetrieverWrapper(retriever), # 클래스 객체를 생성해서 value로 넣어줌
-    "prompt": ContextToPrompt(contextual_prompt),
-    "llm": model
+    'context'=RetrieverWrapper(retriever), 
+    'prompt'=ContextToPrompt(contextual_prompt),
+    'llm'=model
 }
 
 def generate_response(query_text: str):
     try:
-        # rag_chain.invoke()를 사용하여 query_text를 처리합니다.
-        result = rag_chain_debug.invoke(query_text)  # query_text를 사용해 처리
-        print("Response inside generate_response:", result) #??
+        # 1. 리트리버로 question에 대한 검색 결과를 response_docs에 저장함
+        response_docs = rag_chain_debug["context"].invoke({"question": query_text})
+
+        # 2. 프롬프트에 질문과 response_docs를 넣어줌
+        prompt_messages = rag_chain_debug["prompt"].invoke({
+            "context": response_docs,
+            "question": query_text
+            })
+
+        # 3. 완성된 프롬프트를 LLM에 넣어줌
+        result = rag_chain_debug["llm"].invoke(prompt_messages)
+
+        print(result.content)       
+        #print("Response inside generate_response:", result) #**
         return result  # 결과 반환
     except Exception as e:
         print("Error in generate_response:", str(e)) 
-        raise e
-        # 예외가 발생하면 처리하고, 적절한 메시지 반환
-        #raise HTTPException(status_code=500, detail=f"Error processing request: {str(e)}")
+        raise e  # 예외가 발생하면 처리하고, 적절한 메시지 반환

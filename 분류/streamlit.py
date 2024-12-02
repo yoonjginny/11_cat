@@ -15,14 +15,14 @@ import json
 def main():
     st.set_page_config(
         page_title='NewsBot',
-        page_icon=':books:'
-    )
+        page_icon=':books:' 
+        )
 
     st.title('_News ChatBot :red[NewsBot]_ :books:')
 
     if 'messages' not in st.session_state:
         st.session_state['messages'] = [{"role": "assistant", 
-                                        "content": "안녕하세요! 최신 뉴스를 물어봐주세요 :)"}]
+                                        "content": "안녕하세요! 최신 뉴스를 물어보세요 :)"}]
     if 'chat_history' not in st.session_state: 
         st.session_state['chat_history'] = []
 
@@ -40,8 +40,6 @@ def main():
             st.markdown(query)
 
 
-
-
         # 요청 URL
         url = "http://127.0.0.1:8000/query"
         #url = "https://secure-mayfly-instantly.ngrok-free.app/query"
@@ -52,6 +50,9 @@ def main():
         # POST 요청을 보내기 위한 헤더 설정
         headers = {"Content-Type": "application/json"}
 
+        # `result` 변수 초기화 
+        result = None
+
         # POST 요청 보내기
         response = requests.post(url, json=data, headers=headers)
 
@@ -61,17 +62,14 @@ def main():
             print("Response:",result)
             #print("Response:", response.json()) # 원본
         else:
-            result = None
             print(f"Error: {response.status_code}, {response.text}")
-
-
 
 
 
         with st.chat_message("assistant"):
             st.session_state.chat_history.append({"role": "user", "content": query}) 
             st.session_state.chat_history.append({"role": "assistant", "content": result}) 
-            st.markdown(result)
+            st.markdown(result if result else "뉴스를 가져오지 못했습니다. 다시 시도해주세요.")
 
             # response가 None인 경우 대비
             if response:
