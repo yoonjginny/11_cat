@@ -22,6 +22,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_community.chat_message_histories import ChatMessageHistory
 from datetime import datetime
 
+
 # 1. 환경 변수에서 API 키 가져오기
 config = dotenv_values(".env")
 openai_api_key = config.get('OPENAI_API_KEY')
@@ -49,7 +50,7 @@ def get_news(query, display=10):
     }
     response = requests.get(NAVER_NEWS_API_URL, headers=headers, params=params)
     news_data = response.json()
-    print("API 응답 데이터: ", news_data) # 응답 데이터를 출력하여 확인
+    #print("API 응답 데이터: ", news_data) # 응답 데이터를 출력하여 확인
     return news_data
 
 news_data = get_news("오늘의 뉴스")
@@ -153,7 +154,10 @@ def generate_response(query_text: str):
     try:
         # rag_chain.invoke()를 사용하여 query_text를 처리합니다.
         result = rag_chain_debug.invoke(query_text)  # query_text를 사용해 처리
+        print("Response inside generate_response:", result) #??
         return result  # 결과 반환
     except Exception as e:
+        print("Error in generate_response:", str(e)) 
+        raise e
         # 예외가 발생하면 처리하고, 적절한 메시지 반환
-        raise HTTPException(status_code=500, detail=f"Error processing request: {str(e)}")
+        #raise HTTPException(status_code=500, detail=f"Error processing request: {str(e)}")

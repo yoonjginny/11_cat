@@ -5,6 +5,10 @@ from langchain.memory import StreamlitChatMessageHistory
 from langchain.callbacks import get_openai_callback
 from datetime import datetime
 
+from langchain_community.chat_message_histories import StreamlitChatMessageHistory
+from langchain_community.callbacks.manager import get_openai_callback
+
+
 import requests
 import json
 
@@ -19,6 +23,8 @@ def main():
     if 'messages' not in st.session_state:
         st.session_state['messages'] = [{"role": "assistant", 
                                         "content": "안녕하세요! 최신 뉴스를 물어봐주세요 :)"}]
+    if 'chat_history' not in st.session_state: 
+        st.session_state['chat_history'] = []
 
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
@@ -51,9 +57,11 @@ def main():
 
         # 응답 출력 디버그,  Streamlit 의 화면 출력 코드에 response.json()['result'] 입력 필요
         if response.status_code == 200:
-            print(response.json()['result'])
+            result=response.json()['result',None]
+            print("Response:",result)
             #print("Response:", response.json()) # 원본
         else:
+            result = None
             print(f"Error: {response.status_code}, {response.text}")
 
 
@@ -61,9 +69,9 @@ def main():
 
 
         with st.chat_message("assistant"):
-            st.session_state.chat_history.add_message("user", query)
-            st.session_state.chat_history.add_message("assistant", response.content)
-            st.markdown(response.content)
+            st.session_state.chat_history.append({"role": "user", "content": query}) 
+            st.session_state.chat_history.append({"role": "assistant", "content": result}) 
+            st.markdown(result)
 
             # response가 None인 경우 대비
             if response:
