@@ -28,8 +28,8 @@ openai_api_key = config.get('OPENAI_API_KEY')
 #openai_api_key = os.getenv("LLM_11_CAT_PROJECT")
 #from getpass import getpass
 #os.environ["OPENAI_API_KEY"] = getpass("OpenAI API key 입력: ")
-naver_client_id = os.getenv("NAVER_CLIENT_ID")
-naver_client_secret = os.getenv("NAVER_CLIENT_SECRET")
+naver_client_id = config.get("NAVER_CLIENT_ID")
+naver_client_secret = config.get("NAVER_CLIENT_SECRET")
 os.environ["OPENAI_API_KEY"] = openai_api_key
 
 # 2. 모델 초기화 (model)
@@ -49,7 +49,7 @@ def get_news(query, display=10):
     }
     response = requests.get(NAVER_NEWS_API_URL, headers=headers, params=params)
     news_data = response.json()
-    #print("API 응답 데이터: ", news_data) # 응답 데이터를 출력하여 확인
+    print("API 응답 데이터: ", news_data) # 응답 데이터를 출력하여 확인
     return news_data
 
 news_data = get_news("오늘의 뉴스")
