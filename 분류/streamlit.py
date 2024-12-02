@@ -70,7 +70,6 @@ def main():
             print(f"Error: {response.status_code}, {response.text}")
 
 
-
         with st.chat_message("assistant"):
             st.session_state.chat_history.append({"role": "user", "content": query}) 
             st.session_state.chat_history.append({"role": "assistant", "content": result}) 
@@ -79,9 +78,12 @@ def main():
 
             # response가 None인 경우 대비
             if response:
-                st.session_state.messages.append({"role": "assistant", "content": response.content})
+                st.session_state.messages.append({"role": "assistant", "content": result['content']})
             else:
                 st.session_state.messages.append({"role": "assistant", "content": "뉴스를 가져오지 못했습니다. 다시 시도해주세요."})
+
+        # Chat history 저장 
+        st.session_state.chat_history.append({"role": "assistant", "content": result['content'] if result else "뉴스를 가져오지 못했습니다. 다시 시도해주세요."})
 
 
 def tiktoken_len(text):

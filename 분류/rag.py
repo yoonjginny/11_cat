@@ -43,7 +43,7 @@ headers = {
     "X-Naver-Client-Secret": naver_client_secret
 }
 
-def get_news(query, display=20):
+def get_news(query, display=50):
     params = {
         "query": query,
         "display": display
