@@ -20,7 +20,7 @@
 ***
 
 ## 프로젝트 구조
-[🔑프로젝트 구조](https://excalidraw.com/#json=L_xNbOJkO6tpeWRN1RyPB,dhRrWrvJsdPTKo-Q-HW7Sg)
+[🔑프로젝트 구조](https://excalidraw.com/#json=QuYLlVgxDJso7_o-aGJHG,rBnzBwNOyYYGqi7i_7QJWw)
 ***
 
 ## 주요 기능
