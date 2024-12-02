@@ -12,6 +12,7 @@ from langchain_community.callbacks.manager import get_openai_callback
 import requests
 import json
 
+
 def main():
     st.set_page_config(
         page_title='NewsBot',
@@ -25,6 +26,7 @@ def main():
                                         "content": "안녕하세요! 최신 뉴스를 물어보세요 :)"}]
     if 'chat_history' not in st.session_state: 
         st.session_state['chat_history'] = []
+
 
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
@@ -58,9 +60,12 @@ def main():
 
         # 응답 출력 디버그,  Streamlit 의 화면 출력 코드에 response.json()['result'] 입력 필요
         if response.status_code == 200:
-            result=response.json()['result',None]
-            print("Response:",result)
-            #print("Response:", response.json()) # 원본
+            try: 
+                response_json = response.json() 
+                result = response_json.get('result', None) # None이 반환되지 않도록 수정 
+                print("Response:", result) # 응답 데이터 출력 
+            except json.JSONDecodeError: 
+                print("Error: Failed to decode JSON response")
         else:
             print(f"Error: {response.status_code}, {response.text}")
 
@@ -69,7 +74,8 @@ def main():
         with st.chat_message("assistant"):
             st.session_state.chat_history.append({"role": "user", "content": query}) 
             st.session_state.chat_history.append({"role": "assistant", "content": result}) 
-            st.markdown(result if result else "뉴스를 가져오지 못했습니다. 다시 시도해주세요.")
+            st.markdown(result['content'] if result else "뉴스를 가져오지 못했습니다. 다시 시도해주세요.")
+
 
             # response가 None인 경우 대비
             if response:

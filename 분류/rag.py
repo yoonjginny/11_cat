@@ -43,7 +43,7 @@ headers = {
     "X-Naver-Client-Secret": naver_client_secret
 }
 
-def get_news(query, display=10):
+def get_news(query, display=20):
     params = {
         "query": query,
         "display": display
@@ -146,9 +146,9 @@ class RetrieverWrapper:
 
 # RAG 체인 설정
 rag_chain_debug = {
-    'context'=RetrieverWrapper(retriever), 
-    'prompt'=ContextToPrompt(contextual_prompt),
-    'llm'=model
+    'context':RetrieverWrapper(retriever), 
+    'prompt':ContextToPrompt(contextual_prompt),
+    'llm':model
 }
 
 def generate_response(query_text: str):
@@ -165,7 +165,7 @@ def generate_response(query_text: str):
         # 3. 완성된 프롬프트를 LLM에 넣어줌
         result = rag_chain_debug["llm"].invoke(prompt_messages)
 
-        print(result.content)       
+        #print(result.content)       
         #print("Response inside generate_response:", result) #**
         return result  # 결과 반환
     except Exception as e:

@@ -20,9 +20,9 @@ async def query(request: QueryRequest):
     # rag.py에서 정의된 generate_response 함수 호출
     try:
         result = rag.generate_response(query_text)
-        print("Generated response:", result) #??
+        print("Generated response:", result) #**
     except Exception as e:
-        print("Error in FastAPI:", str(e)) #??
+        print("Error in FastAPI:", str(e)) #**
         #if 'items' in str(e): 
         #    raise HTTPException(status_code=404, detail="Items not found in response")
         raise HTTPException(status_code=500, detail=f"Error processing request: {str(e)}")
