@@ -22,9 +22,9 @@ st.set_page_config(
 load_dotenv()
 
 # 환경 변수에서 API 키 가져오기
-openai_api_key = os.getenv("OPENAI_API_KEY").strip()
-naver_client_id = os.getenv("NAVER_CLIENT_ID").strip()
-naver_client_secret = os.getenv("NAVER_CLIENT_SECRET").strip()
+openai_api_key = os.getenv("OPENAI_API_KEY")
+naver_client_id = os.getenv("NAVER_CLIENT_ID")
+naver_client_secret = os.getenv("NAVER_CLIENT_SECRET")
 
 os.environ["OPENAI_API_KEY"] = openai_api_key
 

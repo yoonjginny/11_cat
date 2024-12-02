@@ -103,6 +103,8 @@ def save_results(question, response, result_dir):
     os.makedirs(os.path.dirname(result_file_path), exist_ok=True)
     with open(result_file_path, 'a', encoding='utf-8') as rf:
         rf.write(f"Response: {response}\n\n")
+
+
 # 8. 메인 대화 루프
 def main():
     result_dir = "C:\\Users\\dlswj\\Documents\\python\\quest"  # 결과 저장 디렉토리
