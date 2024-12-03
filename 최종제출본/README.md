@@ -65,7 +65,7 @@ OPEN_API_KEY를 대입하는 과정에서 환경변수 문제가 발생함.(최�
 
 ***
 ## 결과
-[🎈프로젝트 결과물](file:///C:/Users/owner/Downloads/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B2%B0%EA%B3%BC%EB%AC%BC.mp4)
+[🎈프로젝트 결과물]()
 ***
 
 ## 
