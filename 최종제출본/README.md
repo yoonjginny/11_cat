@@ -20,7 +20,7 @@
 ***
 
 ## 프로젝트 구조
-[🔑프로젝트 구조](https://excalidraw.com/#json=QuYLlVgxDJso7_o-aGJHG,rBnzBwNOyYYGqi7i_7QJWw)
+[🔑프로젝트 구조](https://excalidraw.com/#json=ED4BwHOG0jHne1OagL10a,IyZajZv-LNnOq8VJz_AVKg)
 ## 프로젝트 PPT
 [✨프로젝트 보고서](https://docs.google.com/presentation/d/1Es9X6uiWgfBH_jLD8_vWzjJNfTw97hQ_kcZoeq4DXLA/edit#slide=id.p1)
 ***
