@@ -20,6 +20,8 @@
 인공지능에게 물어봐서 뉴스를 한눈에 알 수 있는 인공지능 챗봇 입니다.
 ```
 ***
+## 와이어프레임
+[와이어프레임](https://excalidraw.com/#json=tI0fs8StXa9WkjrdJbVVD,lqCruYQVFbHg6S5Emod4cA)
 ## 아키텍처
 [아키텍처](https://excalidraw.com/#json=67Et7apTC74w7oLYsD3v8,6vt8zScruhEXk60kO29j_g)
 ## 다이어그램
