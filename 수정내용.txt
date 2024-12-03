@@ -1,0 +1,71 @@
+Streamlit.py
+# Chat logic
+
+
+시작합니다 다른컴이라 마이크 소리작아서 
+그냥 말안하고 진행하겠습니다
+
+추가된 코드 와 위치는 ---- 
+def main():
+    def save_question(query):
+        # 고정된 파일명 "prompt1.txt"에 덧붙이기 ----
+     def save_question(query):
+        # 고정된 파일명 "prompt1.txt"에 덧붙이기
+        prompt_file_path = os.path.join("C:\\Prompt", "prompt1.txt")
+
+        # 디렉토리가 없으면 생성
+        os.makedirs(os.path.dirname(prompt_file_path), exist_ok=True)
+
+        # 현재 시간으로 타임스탬프 생성
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        # 질문을 고정된 파일에 타임스탬프와 함께 덧붙이기
+        with open(prompt_file_path, 'a', encoding='utf-8') as pf:
+            pf.write(f"Timestamp: {timestamp} | Question: {query}\n")
+    
+        #--------------------
+    def save_response(result):
+    # 고정된 파일명 "result1.txt"에 덧붙이기
+        result_file_path = os.path.join( "C:\\Result", "result1.txt")
+
+    # 디렉토리가 없으면 생성
+        os.makedirs(os.path.dirname(result_file_path), exist_ok=True)
+
+    # 현재 시간으로 타임스탬프 생성
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    # 응답을 고정된 파일에 타임스탬프와 함께 덧붙이기
+        with open(result_file_path, 'a', encoding='utf-8') as rf:
+            rf.write(f"Timestamp: {timestamp} | Response: {result}\n\n")  
+#--------------------
+  # POST 요청 보내기 --------
+  response = requests.post(url, json=data, headers=headers) 요거 아래 
+  save_question(query)
+# 응답 출력 디버그,  Streamlit 의 화면 출력 코드에 response.json()['result'] 입력 필요------
+        save_response(result)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
