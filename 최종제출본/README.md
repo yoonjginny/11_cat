@@ -20,9 +20,10 @@
 인공지능에게 물어봐서 뉴스를 한눈에 알 수 있는 인공지능 챗봇 입니다.
 ```
 ***
-
-## 프로젝트 구조
-[🔑프로젝트 구조](https://excalidraw.com/#json=ED4BwHOG0jHne1OagL10a,IyZajZv-LNnOq8VJz_AVKg)
+## 아키텍처
+[아키텍처](https://excalidraw.com/#json=67Et7apTC74w7oLYsD3v8,6vt8zScruhEXk60kO29j_g)
+## 다이어그램
+[다이어그램](https://excalidraw.com/#json=noJGN4bIiiTgS1YXiA-Md,YIPBKd4Dfe3XO93wdfEsig)
 ## 프로젝트 PPT
 [✨프로젝트 보고서](https://docs.google.com/presentation/d/1Es9X6uiWgfBH_jLD8_vWzjJNfTw97hQ_kcZoeq4DXLA/edit#slide=id.p1)
 ***
